@@ -366,6 +366,9 @@ class LLM:
                             temperature=temperature,
                             stream=False,  # force non-streaming
                             tools=formatted_tools,
+                            base_url=self.base_url,
+                            api_key=self.api_key,
+                            headers={"x-api-key": self.api_key},
                             **{k:v for k,v in kwargs.items() if k != 'reasoning_steps'}
                         )
                         reasoning_content = resp["choices"][0]["message"].get("provider_specific_fields", {}).get("reasoning_content")
@@ -400,6 +403,9 @@ class LLM:
                                     tools=formatted_tools,
                                     temperature=temperature,
                                     stream=True,
+                                    base_url=self.base_url,
+                                    api_key=self.api_key,
+                                    headers={"x-api-key": self.api_key},                                    
                                     **kwargs
                                 ):
                                     if chunk and chunk.choices and chunk.choices[0].delta.content:
@@ -415,6 +421,9 @@ class LLM:
                                 tools=formatted_tools,
                                 temperature=temperature,
                                 stream=True,
+                                base_url=self.base_url,
+                                api_key=self.api_key,
+                                headers={"x-api-key": self.api_key},                                
                                 **kwargs
                             ):
                                 if chunk and chunk.choices and chunk.choices[0].delta.content:
@@ -429,6 +438,9 @@ class LLM:
                         tools=formatted_tools,
                         temperature=temperature,
                         stream=False,  # No streaming for tool call check
+                        base_url=self.base_url,
+                        api_key=self.api_key,
+                        headers={"x-api-key": self.api_key},                        
                         **kwargs
                     )
                     
@@ -544,6 +556,9 @@ class LLM:
                                                 model=self.model,
                                                 messages=follow_up_messages,
                                                 temperature=temperature,
+                                                base_url=self.base_url,
+                                                api_key=self.api_key,
+                                                headers={"x-api-key": self.api_key},                                                
                                                 stream=True
                                             ):
                                                 if chunk and chunk.choices and chunk.choices[0].delta.content:
@@ -556,6 +571,9 @@ class LLM:
                                             model=self.model,
                                             messages=follow_up_messages,
                                             temperature=temperature,
+                                            base_url=self.base_url,
+                                            api_key=self.api_key,
+                                            headers={"x-api-key": self.api_key},                                            
                                             stream=True
                                         ):
                                             if chunk and chunk.choices and chunk.choices[0].delta.content:
@@ -571,6 +589,9 @@ class LLM:
                                 messages=messages,
                                 temperature=temperature,
                                 stream=False,  # force non-streaming
+                                base_url=self.base_url,
+                                api_key=self.api_key,
+                                headers={"x-api-key": self.api_key},                                
                                 **{k:v for k,v in kwargs.items() if k != 'reasoning_steps'}
                             )
                             reasoning_content = resp["choices"][0]["message"].get("provider_specific_fields", {}).get("reasoning_content")
@@ -604,6 +625,9 @@ class LLM:
                                         model=self.model,
                                         messages=messages,
                                         temperature=temperature,
+                                        base_url=self.base_url,
+                                        api_key=self.api_key,
+                                        headers={"x-api-key": self.api_key},                                        
                                         stream=True
                                     ):
                                         if chunk and chunk.choices and chunk.choices[0].delta.content:
@@ -616,6 +640,9 @@ class LLM:
                                     model=self.model,
                                     messages=messages,
                                     temperature=temperature,
+                                    base_url=self.base_url,
+                                    api_key=self.api_key,
+                                    headers={"x-api-key": self.api_key},                                    
                                     stream=True
                                 ):
                                     if chunk and chunk.choices and chunk.choices[0].delta.content:
@@ -660,6 +687,9 @@ Output MUST be JSON with 'reflection' and 'satisfactory'.
                             model=self.model,
                             messages=reflection_messages,
                             temperature=temperature,
+                            base_url=self.base_url,
+                            api_key=self.api_key,
+                            headers={"x-api-key": self.api_key},                            
                             stream=False,  # Force non-streaming
                             response_format={"type": "json_object"},
                             **{k:v for k,v in kwargs.items() if k != 'reasoning_steps'}
@@ -694,6 +724,9 @@ Output MUST be JSON with 'reflection' and 'satisfactory'.
                                     model=self.model,
                                     messages=reflection_messages,
                                     temperature=temperature,
+                                    base_url=self.base_url,
+                                    api_key=self.api_key,
+                                    headers={"x-api-key": self.api_key},                                    
                                     stream=True,
                                     response_format={"type": "json_object"},
                                     **{k:v for k,v in kwargs.items() if k != 'reasoning_steps'}
@@ -708,6 +741,9 @@ Output MUST be JSON with 'reflection' and 'satisfactory'.
                                 model=self.model,
                                 messages=reflection_messages,
                                 temperature=temperature,
+                                base_url=self.base_url,
+                                api_key=self.api_key,
+                                headers={"x-api-key": self.api_key},                                
                                 stream=True,
                                 response_format={"type": "json_object"},
                                 **{k:v for k,v in kwargs.items() if k != 'reasoning_steps'}
@@ -1195,6 +1231,9 @@ Output MUST be JSON with 'reflection' and 'satisfactory'.
                                 model=self.model,
                                 messages=messages,
                                 temperature=temperature,
+                                base_url=self.base_url,
+                                api_key=self.api_key,
+                                headers={"x-api-key": self.api_key},                                
                                 stream=True,
                                 **{k:v for k,v in kwargs.items() if k != 'reasoning_steps'}
                             ):
@@ -1240,6 +1279,9 @@ Output MUST be JSON with 'reflection' and 'satisfactory'.
                     model=self.model,
                     messages=reflection_messages,
                     temperature=temperature,
+                    base_url=self.base_url,
+                    api_key=self.api_key,
+                    headers={"x-api-key": self.api_key},                    
                     stream=False,  # Force non-streaming
                     response_format={"type": "json_object"},
                     **{k:v for k,v in kwargs.items() if k != 'reasoning_steps'}
@@ -1274,6 +1316,9 @@ Output MUST be JSON with 'reflection' and 'satisfactory'.
                             model=self.model,
                             messages=reflection_messages,
                             temperature=temperature,
+                            base_url=self.base_url,
+                            api_key=self.api_key,
+                            headers={"x-api-key": self.api_key},                            
                             stream=True,
                             response_format={"type": "json_object"},
                             **{k:v for k,v in kwargs.items() if k != 'reasoning_steps'}
@@ -1288,6 +1333,9 @@ Output MUST be JSON with 'reflection' and 'satisfactory'.
                         model=self.model,
                         messages=reflection_messages,
                         temperature=temperature,
+                        base_url=self.base_url,
+                        api_key=self.api_key,
+                        headers={"x-api-key": self.api_key},                        
                         stream=True,
                         response_format={"type": "json_object"},
                         **{k:v for k,v in kwargs.items() if k != 'reasoning_steps'}
@@ -1463,6 +1511,9 @@ Output MUST be JSON with 'reflection' and 'satisfactory'.
                             model=self.model,
                             messages=messages,
                             temperature=temperature,
+                            base_url=self.base_url,
+                            api_key=self.api_key,
+                            headers={"x-api-key": self.api_key},                            
                             stream=True,
                             **kwargs
                         ):
@@ -1475,6 +1526,9 @@ Output MUST be JSON with 'reflection' and 'satisfactory'.
                         model=self.model,
                         messages=messages,
                         temperature=temperature,
+                        base_url=self.base_url,
+                        api_key=self.api_key,
+                        headers={"x-api-key": self.api_key},                        
                         stream=True,
                         **kwargs
                     ):
@@ -1485,6 +1539,9 @@ Output MUST be JSON with 'reflection' and 'satisfactory'.
                     model=self.model,
                     messages=messages,
                     temperature=temperature,
+                    base_url=self.base_url,
+                    api_key=self.api_key,
+                    headers={"x-api-key": self.api_key},                    
                     stream=False,
                     **kwargs
                 )
